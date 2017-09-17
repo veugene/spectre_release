@@ -1,3 +1,10 @@
+Code copyright 2017, Eugene Vorontsov
+
+Released under GPLv3 license, as described below.
+
+
+
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
