@@ -2,6 +2,8 @@
 
 # System libs
 from __future__ import print_function
+if hasattr(__builtins__, 'raw_input'):
+    input = raw_input
 from collections import OrderedDict
 import os
 import sys
@@ -645,7 +647,12 @@ def setup_mnist(model_params, rng, data_dir, results_dir):
     
     # Prepare data
     f = gzip.open(os.path.join(data_dir, "mnist.pkl.gz"), 'rb')
-    train_set, valid_set, test_set = pickle.load(f, encoding='iso-8859-1')
+    if sys.version_info >= (3,):
+        # Python 3
+        train_set, valid_set, test_set = pickle.load(f, encoding='iso-8859-1')
+    else:
+        # Python 2
+        train_set, valid_set, test_set = pickle.load(f)
     new_shape = None
     if global_params['scale_mnist'] is not None:
         new_shape = np.array([28, 28])*global_params['scale_mnist']
