@@ -1221,7 +1221,7 @@ def train(model, rng, results_dir, resume=False):
             
             # If there is an accuracy metric, save model with highest
             # validation accuracy.
-            track_key, truck_func = model['track_key'], model['track_func']
+            track_key, track_func = model['track_key'], model['track_func']
             if track_key in metrics_valid.keys():
                 if history_valid[track_key][-1] == \
                                           track_func(history_valid[track_key]):
