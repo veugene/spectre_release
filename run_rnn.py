@@ -1235,9 +1235,9 @@ def train(model, rng, results_dir, resume=False):
             if track_key in metrics_valid.keys():
                 if history_valid[track_key][-1] == \
                                           track_func(history_valid[track_key]):
-                    save_weights(all_trainable_params,
-                                 save_to=os.path.join(results_dir,
-                                                      "best_weights.h5"))
+                    save_model(model,
+                               weights_path=os.path.join(results_dir,
+                                                         "best_weights.h5"))
             
         # Add other metrics
         if global_params['print_penalties']:
@@ -1284,10 +1284,9 @@ def train(model, rng, results_dir, resume=False):
                 return print_msg
             
             print_msg = run_test("Test results on final weights:")
-            loaded_params = load_weights(os.path.join(results_dir,
-                                                      "best_weights.h5"))
-            set_weights(model_params=all_trainable_params,
-                        loaded_params=loaded_params)
+            model = load_model(model,
+                               weights_path=os.path.join(results_dir,
+                                                         "best_weights.h5"))
             print_msg += "\n"
             print_msg += run_test("Test results on best weights:")
             print(print_msg)
