@@ -32,10 +32,12 @@ Details are in the paper.
 
 ## Running the code
 
-Training (+ validation/testing) can be performed by running `run_rnn.py`.
+Training (+ validation/testing) can be performed by running `python3 run_rnn.py`.
 
-Check `run_rnn.py --help` for an extensive list of arguments.
+Check `python3 run_rnn.py --help` for an extensive list of arguments.
 
 This code supports a regular RNN and a factorized RNN with a configurable spectral margin, as well as a wide choice of transition matrix initializations and hidden-to-hidden transition nonlinearities. This code does not include an LSTM setup at this time.
 
 Refactoring code for release may have introduced some bugs - please file an issue if you find any.
+
+The code was written while using python3. Support has been added for python2. Please let me know if there are any remaining issues with python2 compatibility.
