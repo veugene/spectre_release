@@ -709,11 +709,14 @@ def setup_mnist(model_params, rng, data_dir, results_dir):
     data_gen = (data_gen_train, data_gen_valid, data_gen_test)
     
     # Input
-    input_shape = (global_params['batch_size'], vec_len, 1)
+    input_shape = (None, vec_len, 1)
     input = lasagne.layers.InputLayer(shape=input_shape)
     zeros_input_shape = input_shape[:-1]+(model_params['num_units'],)
+    zeros_inferred_shape = (input.input_var.shape[0],
+                            vec_len,
+                            model_params['num_units'])
     zeros_input = lasagne.layers.InputLayer(shape=zeros_input_shape,
-                                 input_var=T.zeros(shape=zeros_input_shape,
+                                 input_var=T.zeros(shape=zeros_inferred_shape,
                                                    dtype=theano.config.floatX))
     model_kwargs['incoming'] = input
     
