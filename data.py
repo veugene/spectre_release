@@ -161,13 +161,14 @@ def ptb_iterator(source, source_dict, batch_size, maxlen, char_level=False,
     
 
 def mnist_iterator(data, batch_size, permute=0, permutation=None,
-                   new_shape=None, rng=None):
+                   new_shape=None, shuffle=False, rng=None):
     '''
     permute=0 : do not permute
     permute=1 : permute once
     permute=2 : randomly permute every sample
     
     new_shape : rescale images to this size (no rescaling if new_shape is None)
+    shuffle   : shuffle the data samples
     
     Note: When permuting, use the rng_seed to make all iterators permute
           in the same order.
@@ -208,7 +209,10 @@ def mnist_iterator(data, batch_size, permute=0, permutation=None,
     # return this generator
     def gen():
         for b in range(num_batches):
-            indices = rng.permutation(len(x))
+            if shuffle:
+                indices = rng.permutation(len(x))
+            else:
+                indices = np.arange(len(x))
             x_batch = x[indices[b*batch_size:(b+1)*batch_size]]
             if new_shape is not None:
                 x_batch = rescale(x_batch)

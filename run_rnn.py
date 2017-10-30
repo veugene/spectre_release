@@ -699,12 +699,15 @@ def setup_mnist(model_params, rng, data_dir, results_dir):
         data_gen_kwargs['permute'] = 2
     data_gen_train = mnist_iterator(train_set,
                                     rng=copy.copy(rng['data']),
+                                    shuffle=True,
                                     **data_gen_kwargs)
     data_gen_valid = mnist_iterator(valid_set,
                                     rng=copy.copy(rng['data']),
+                                    shuffle=False,
                                     **data_gen_kwargs)
     data_gen_test = mnist_iterator(test_set,
                                    rng=copy.copy(rng['data']),
+                                   shuffle=False,
                                    **data_gen_kwargs)
     data_gen = (data_gen_train, data_gen_valid, data_gen_test)
     
@@ -785,13 +788,15 @@ def setup_ptb(model_params, rng, data_dir):
         train_vocab_len = 49
     data_gen_train = ptb_iterator(file_paths['train'],
                                   rng=copy.copy(rng['data']),
-                                  #random_sampling=True,
+                                  shuffle=True,
                                   **ptb_iterator_kwargs)
     data_gen_valid = ptb_iterator(file_paths['valid'],
                                   rng=copy.copy(rng['data']),
+                                  shuffle=False,
                                   **ptb_iterator_kwargs)
     data_gen_test  = ptb_iterator(file_paths['test'],
                                   rng=copy.copy(rng['data']),
+                                  shuffle=False,
                                   **ptb_iterator_kwargs)         
     data_gen = (data_gen_train, data_gen_valid, data_gen_test)
     
